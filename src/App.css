@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+.card {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 12rem; /* Fixed height */
+  object-fit: cover; /* Ensure images fill the area proportionally */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Align content evenly */
+}
