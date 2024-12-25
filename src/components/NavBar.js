@@ -47,6 +47,11 @@ function NavBar() {
                 Contact Us
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/PropertyList" className="nav-link">
+                Property List
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
