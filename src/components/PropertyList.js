@@ -30,7 +30,7 @@ function PropertyList() {
       {/* Property Cards */}
       <div
         className={`d-flex flex-wrap ${
-          isListView ? "flex-column" : "justify-content-between"
+          isListView ? "flex-column" : "justify-content-center"
         }`}
       >
         {PropertyRecords.properties.map((property) => (

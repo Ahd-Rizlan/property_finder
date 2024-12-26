@@ -2,7 +2,7 @@ import React from "react";
 
 function Card({ Property, isListView }) {
   const cardStyle = {
-    width: isListView ? "80%" : "18rem",
+    width: isListView ? "100%" : "18rem",
     margin: "0 auto",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     backgroundColor: "#343a40", // Dark background color
@@ -38,9 +38,18 @@ function Card({ Property, isListView }) {
         <h5 className="card-title">{Property.type}</h5>
         <p className="card-text">Price: ${Property.price}</p>
         <p className="card-text">Location: {Property.location}</p>
-        <a href={Property.url} className="btn btn-primary">
-          More Details
-        </a>
+        <div className="d-grid gap-2">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => (window.location.href = Property.url)}
+          >
+            View Details
+          </button>
+          <button type="submit" className="btn btn-primary">
+            Add To Favourite
+          </button>
+        </div>
       </div>
     </div>
   );
