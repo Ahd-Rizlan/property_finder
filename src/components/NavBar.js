@@ -1,35 +1,38 @@
+// NavBar.js
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
 
 function NavBar() {
+  const [favouritesCount, setFavouritesCount] = useState(
+    (JSON.parse(localStorage.getItem("favourites")) || []).length
+  );
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+      setFavouritesCount(favourites.length);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        {/* Brand Logo */}
-        <Link to="/" className="navbar-brand d-flex align-items-center">
-          <img
-            src="propertyFinder_Nav_logo.jpg"
-            alt="Site Logo"
-            className="rounded-circle me-2"
-            style={{ height: "40px", width: "40px" }}
-          />
+        <Link to="/" className="navbar-brand">
           Property Finder
         </Link>
-
-        {/* Hamburger Menu */}
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
-        {/* Collapsible Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
@@ -40,16 +43,16 @@ function NavBar() {
             <li className="nav-item">
               <Link to="/Favourites" className="nav-link">
                 My Favourites
+                {favouritesCount > 0 && (
+                  <span className="badge bg-primary ms-2">
+                    {favouritesCount}
+                  </span>
+                )}
               </Link>
             </li>
             <li className="nav-item">
               <Link to="/ContactUs" className="nav-link">
                 Contact Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/PropertyList" className="nav-link">
-                Property List
               </Link>
             </li>
           </ul>

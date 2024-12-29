@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Card({ Property, isListView }) {
   const cardStyle = {
@@ -9,7 +9,7 @@ function Card({ Property, isListView }) {
     color: "white", // White text for contrast
   };
 
-  const cardHoverStyle = {
+  const cardStyleOnHover = {
     transform: "scale(1.05)",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
   };
@@ -19,12 +19,34 @@ function Card({ Property, isListView }) {
     objectFit: "cover",
   };
 
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  useEffect(() => {
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    setIsFavourite(favourites.some((fav) => fav.id === Property.id));
+  }, [Property.id]);
+
+  const handleAddToFavourites = () => {
+    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    if (isFavourite) {
+      // Remove from favourites
+      const updatedFavourites = favourites.filter(
+        (fav) => fav.id !== Property.id
+      );
+      localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
+    } else {
+      // Add to favourites
+      favourites.push(Property);
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+    }
+    setIsFavourite(!isFavourite);
+  };
 
   return (
     <div
       className="card m-2"
-      style={{ ...cardStyle, ...(isHovered ? cardHoverStyle : {}) }}
+      style={{ ...cardStyle, ...(isHovered ? cardStyleOnHover : {}) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -46,8 +68,12 @@ function Card({ Property, isListView }) {
           >
             View Details
           </button>
-          <button type="submit" className="btn btn-primary">
-            Add To Favourite
+          <button
+            type="button"
+            className={`btn ${isFavourite ? "btn-danger" : "btn-primary"}`}
+            onClick={handleAddToFavourites}
+          >
+            {isFavourite ? "Remove from Favourites" : "Add to Favourites"}
           </button>
         </div>
       </div>
