@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Card({ Property, isListView }) {
-  const cardStyle = {
-    width: isListView ? "100%" : "18rem",
-    margin: "0 auto",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    backgroundColor: "#343a40", // Dark background color
-    color: "white", // White text for contrast
-  };
-
-  const cardStyleOnHover = {
-    transform: "scale(1.05)",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-  };
-
-  const imgStyle = {
-    height: "12rem",
-    objectFit: "cover",
-  };
-
-  const [isHovered, setIsHovered] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
@@ -30,26 +13,38 @@ function Card({ Property, isListView }) {
   const handleAddToFavourites = () => {
     const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
     if (isFavourite) {
-      // Remove from favourites
       const updatedFavourites = favourites.filter(
         (fav) => fav.id !== Property.id
       );
       localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
     } else {
-      // Add to favourites
       favourites.push(Property);
       localStorage.setItem("favourites", JSON.stringify(favourites));
     }
     setIsFavourite(!isFavourite);
+
+    // Trigger the storage event to update NavBar count
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  const cardStyle = {
+    width: isListView ? "100%" : "18rem",
+    margin: "0 auto",
+    backgroundColor: "#343a40",
+    color: "white",
+  };
+
+  const imgStyle = {
+    height: "12rem",
+    objectFit: "cover",
+  };
+
+  const handleSeeMore = () => {
+    navigate("/property-detail", { state: { property: Property } }); // Navigate to the PropertyDetail page
   };
 
   return (
-    <div
-      className="card m-2"
-      style={{ ...cardStyle, ...(isHovered ? cardStyleOnHover : {}) }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="card m-2" style={cardStyle}>
       <img
         src={Property.picture}
         alt={Property.type}
@@ -60,14 +55,16 @@ function Card({ Property, isListView }) {
         <h5 className="card-title">{Property.type}</h5>
         <p className="card-text">Price: ${Property.price}</p>
         <p className="card-text">Location: {Property.location}</p>
-        <div className="d-grid gap-2">
+
+        <div className="d-grid gap-2 mt-3">
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => (window.location.href = Property.url)}
+            onClick={handleSeeMore} // Open full details page
           >
-            View Details
+            See More
           </button>
+
           <button
             type="button"
             className={`btn ${isFavourite ? "btn-danger" : "btn-primary"}`}

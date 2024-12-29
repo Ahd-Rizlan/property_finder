@@ -12,16 +12,12 @@ function Favourites() {
     };
 
     loadFavourites();
+    window.addEventListener("storage", loadFavourites);
+
+    return () => {
+      window.removeEventListener("storage", loadFavourites);
+    };
   }, []);
-
-  const handleRemoveFavourite = (propertyId) => {
-    const updatedFavourites = favourites.filter((fav) => fav.id !== propertyId);
-    localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
-    setFavourites(updatedFavourites);
-
-    // Trigger the `storage` event manually for NavBar sync
-    window.dispatchEvent(new Event("storage"));
-  };
 
   return (
     <div className="container">
@@ -31,12 +27,7 @@ function Favourites() {
       ) : (
         <div className="d-flex flex-wrap justify-content-center">
           {favourites.map((property) => (
-            <Card
-              key={property.id}
-              Property={property}
-              isListView={false}
-              onRemoveFavourite={() => handleRemoveFavourite(property.id)}
-            />
+            <Card key={property.id} Property={property} isListView={false} />
           ))}
         </div>
       )}

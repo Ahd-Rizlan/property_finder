@@ -1,21 +1,20 @@
-// NavBar.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function NavBar() {
-  const [favouritesCount, setFavouritesCount] = useState(
-    (JSON.parse(localStorage.getItem("favourites")) || []).length
-  );
+  const [favouritesCount, setFavouritesCount] = useState(0);
 
   useEffect(() => {
-    const handleStorageChange = () => {
+    const updateFavouritesCount = () => {
       const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
       setFavouritesCount(favourites.length);
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    updateFavouritesCount();
+    window.addEventListener("storage", updateFavouritesCount);
+
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("storage", updateFavouritesCount);
     };
   }, []);
 

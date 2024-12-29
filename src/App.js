@@ -1,12 +1,11 @@
-import logo from "./logo.svg";
-import "./styles/styles.css";
+import React from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
-import Favourites from "./components/Favourites";
 import Home from "./components/Home";
+import Favourites from "./components/Favourites";
 import ContactUs from "./components/ContactUs";
-import PropertyList from "./components/PropertyList";
+import PropertyDetail from "./components/PropertyDetail"; // Import the new PropertyDetail component
 
 function App() {
   return (
@@ -18,7 +17,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/Favourites" element={<Favourites />} />
           <Route path="/ContactUs" element={<ContactUs />} />
-          <Route path="/PropertyList" element={<PropertyList />} />
+          <Route path="/property-detail" element={<PropertyDetail />} />{" "}
+          {/* Add this route */}
         </Routes>
       </div>
     </>
