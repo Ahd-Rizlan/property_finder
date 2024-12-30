@@ -59,26 +59,6 @@ function PropertyList() {
     <div className="container my-5">
       <h2 className="text-center mb-4">Explore Properties</h2>
 
-      {/* View Toggle */}
-      <div className="d-flex justify-content-center mb-4">
-        <button
-          className={`btn ${
-            !isListView ? "btn-primary" : "btn-outline-primary"
-          } me-2`}
-          onClick={() => setIsListView(false)}
-        >
-          Grid View
-        </button>
-        <button
-          className={`btn ${
-            isListView ? "btn-primary" : "btn-outline-primary"
-          }`}
-          onClick={() => setIsListView(true)}
-        >
-          List View
-        </button>
-      </div>
-
       {/* Filters UI with Dark Background */}
       <div className="bg-dark text-white p-4 rounded mb-4">
         {/* Error Message */}
@@ -176,6 +156,26 @@ function PropertyList() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* View Toggle */}
+      <div className="d-flex justify-content-center mb-4">
+        <button
+          className={`btn ${
+            !isListView ? "btn-primary" : "btn-outline-primary"
+          } me-2`}
+          onClick={() => setIsListView(false)}
+        >
+          Grid View
+        </button>
+        <button
+          className={`btn ${
+            isListView ? "btn-primary" : "btn-outline-primary"
+          }`}
+          onClick={() => setIsListView(true)}
+        >
+          List View
+        </button>
       </div>
 
       {/* Property Cards */}

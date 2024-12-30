@@ -44,9 +44,9 @@ function ContactUs() {
       <h2 className="text-center mb-4">Contact Us</h2>
       <div className="row justify-content-center align-items-center">
         {/* Form Section */}
-        <div className="col-md-8 col-lg-6">
+        <div className="col-md-8 col-lg-6 ">
           <div
-            className="p-4 shadow"
+            className="p-4 shadow bg-dark text-white"
             style={{
               backgroundColor: "#fff",
               borderRadius: "15px",

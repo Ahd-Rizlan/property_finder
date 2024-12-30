@@ -22,6 +22,12 @@ function NavBar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
         <Link to="/" className="navbar-brand">
+          <img
+            src="propertyFinder_Nav_logo.jpg"
+            alt="Site Logo"
+            className="rounded-circle me-2"
+            style={{ height: "40px", width: "40px" }}
+          />
           Property Finder
         </Link>
         <button
