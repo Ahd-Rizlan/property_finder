@@ -19,8 +19,16 @@ function Favourites() {
     };
   }, []);
 
+  const containerStyle = {
+    minHeight: "100vh", // Make sure the container takes the full height of the viewport
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
   return (
-    <div className="container">
+    <div style={containerStyle} className="container">
       <h1 className="my-4">My Favourites</h1>
       {favourites.length === 0 ? (
         <p>No favourites added yet!</p>

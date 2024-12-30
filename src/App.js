@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <div className="container">
+      <div className="container bg-dark text-white p-2 mt-2">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

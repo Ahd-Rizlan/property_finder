@@ -56,11 +56,11 @@ function PropertyList() {
     });
 
   return (
-    <div className="container my-5">
+    <div className="container my-5 ">
       <h2 className="text-center mb-4">Explore Properties</h2>
 
       {/* Filters UI with Dark Background */}
-      <div className="bg-dark text-white p-4 rounded mb-4">
+      <div className="bg-dark text-white p-4 rounded mb-4 border border-white">
         {/* Error Message */}
         {errorMessage && (
           <p className="text-danger text-center">{errorMessage}</p>
