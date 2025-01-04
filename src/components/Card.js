@@ -60,41 +60,47 @@ function Card({ Property, isListView }) {
   };
 
   return (
-    <div className="card m-2" style={cardStyle}>
-      {/* Main image display */}
-      <img
-        src={mainImage} // Use the current main image
-        alt={Property.type}
-        className="card-img-top"
-        style={imgStyle}
-      />
+    <div className="card-body">
+      <h5 className="card-title text-center">{Property.type}</h5>
 
-      {/* Thumbnail images with flex-wrap and limited to 4 per row */}
-      <div
-        className="d-flex flex-wrap"
-        style={{
-          gap: "3px",
-          justifyContent: isListView ? "center" : "flex-start", // Center thumbnails in list view
-        }}
-      >
-        {Property.picture.slice(1).map((imageUrl, index) => (
-          <img
-            key={index}
-            src={imageUrl}
-            alt={`Thumbnail ${index + 1}`}
-            style={thumbnailStyle}
-            onClick={() => handleThumbnailClick(imageUrl)} // Update main image on click
-          />
-        ))}
-      </div>
+      <div className="card m-2" style={cardStyle}>
+        {/* Main image display */}
+        <img
+          src={mainImage} // Use the current main image
+          alt={Property.type}
+          className="card-img-top"
+          style={imgStyle}
+        />
 
-      <div className="card-body">
-        <h5 className="card-title">{Property.type}</h5>
-        <p className="card-text">Price: ${Property.price}</p>
-        <p className="card-text">Location: {Property.location}</p>
-        <p className="card-text">Bedrooms: {Property.bedrooms}</p>
-        <p className="card-text">Tenure: {Property.tenure}</p>
-        <p className="card-text">Size: {Property.size}sqft</p>
+        {/* Thumbnail images with flex-wrap and limited to 4 per row */}
+        <div
+          className="d-flex flex-wrap"
+          style={{
+            gap: "3px",
+            justifyContent: isListView ? "center" : "flex-start", // Center thumbnails in list view
+          }}
+        >
+          {Property.picture.slice(1).map((imageUrl, index) => (
+            <img
+              key={index}
+              src={imageUrl}
+              alt={`Thumbnail ${index + 1}`}
+              style={thumbnailStyle}
+              onClick={() => handleThumbnailClick(imageUrl)} // Update main image on click
+            />
+          ))}
+        </div>
+        <p className="card-text h4 mt-5 text-center">{Property.location}</p>
+        <p className="card-text h5 mx-5">
+          <i className="bi bi-cash"></i> Price: ${Property.price}
+        </p>
+        <p className="card-text h5 mx-5">
+          <i className="bi bi-house-door-fill"></i> Bedrooms:{" "}
+          {Property.bedrooms}
+        </p>
+        <p className="card-text h5 mx-5">
+          <i class="bi bi-arrows-vertical"></i> Size: {Property.size} sq.ft
+        </p>
 
         <div className="d-grid gap-2 mt-3">
           <button

@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.floorplan-container .floorplan-zoom {
+  position: relative;
+  /* overflow: hidden; */
+  display: inline-block;
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 8px; /* Match the image's border radius */
+}
+
+.floorplan-container .floorplan-zoom img {
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.floorplan-container .floorplan-zoom:hover img {
+  transform: scale(1.5); /* Zoom in on hover */
+}

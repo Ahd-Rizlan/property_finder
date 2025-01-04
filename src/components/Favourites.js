@@ -28,7 +28,7 @@ function Favourites() {
   };
 
   return (
-    <div style={containerStyle} className="container">
+    <div style={containerStyle} className="container justify-content-center">
       <h1 className="my-4">My Favourites</h1>
       {favourites.length === 0 ? (
         <p>No favourites added yet!</p>

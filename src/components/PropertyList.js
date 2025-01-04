@@ -10,6 +10,9 @@ function PropertyList() {
     maxBedrooms: "",
     minPrice: "",
     maxPrice: "",
+    dateAddedFrom: "",
+    dateAddedTo: "",
+    postcode: "",
   });
   const [sortByPrice, setSortByPrice] = useState(false);
   const [sortByDateDesc, setSortByDateDesc] = useState(false);
@@ -37,6 +40,16 @@ function PropertyList() {
   // Filter and Sort logic
   const filteredProperties = PropertyRecords.properties
     .filter((property) => {
+      const propertyDate = new Date(
+        `${property.added.year}-${property.added.month}-${property.added.day}`
+      );
+      const minDate = filters.dateAddedFrom
+        ? new Date(filters.dateAddedFrom)
+        : null;
+      const maxDate = filters.dateAddedTo
+        ? new Date(filters.dateAddedTo)
+        : null;
+
       return (
         (filters.type === "" || property.type === filters.type) &&
         (filters.minBedrooms === "" ||
@@ -46,7 +59,11 @@ function PropertyList() {
         (filters.minPrice === "" ||
           property.price >= parseFloat(filters.minPrice)) &&
         (filters.maxPrice === "" ||
-          property.price <= parseFloat(filters.maxPrice))
+          property.price <= parseFloat(filters.maxPrice)) &&
+        (minDate ? propertyDate >= minDate : true) && // Filter by dateAddedFrom
+        (maxDate ? propertyDate <= maxDate : true) && // Filter by dateAddedTo
+        (filters.postcode === "" ||
+          property.postcode.startsWith(filters.postcode)) // Filter by postcode
       );
     })
     .sort((a, b) => {
@@ -54,7 +71,6 @@ function PropertyList() {
         return a.price - b.price;
       }
       if (sortByDateDesc) {
-        // Sort by date added in descending order
         const dateA = new Date(
           `${a.added.year}-${a.added.month}-${a.added.day}`
         );
@@ -79,7 +95,7 @@ function PropertyList() {
 
         <div className="d-flex justify-content-between flex-wrap mb-4">
           {/* Type Filter */}
-          <div className="w-25 mb-3">
+          <div className="col-12 col-md-3 mb-3">
             <label className="form-label">Property Type</label>
             <select
               className="form-select"
@@ -94,8 +110,8 @@ function PropertyList() {
           </div>
 
           {/* Bedrooms Filter */}
-          <div className="d-flex w-50 mb-3">
-            <div className="w-50 me-2">
+          <div className="col-12 col-md-5 mb-3 d-flex">
+            <div className="col-6 pe-2">
               <label className="form-label">Min Bedrooms</label>
               <input
                 type="number"
@@ -108,7 +124,7 @@ function PropertyList() {
                 min="1"
               />
             </div>
-            <div className="w-50">
+            <div className="col-6 ps-2">
               <label className="form-label">Max Bedrooms</label>
               <input
                 type="number"
@@ -124,8 +140,8 @@ function PropertyList() {
           </div>
 
           {/* Price Filter */}
-          <div className="d-flex w-50 mb-3">
-            <div className="w-50 me-2">
+          <div className="col-12 col-md-5 mb-3 d-flex">
+            <div className="col-6 pe-2">
               <label className="form-label">Min Price</label>
               <input
                 type="number"
@@ -138,7 +154,7 @@ function PropertyList() {
                 min="10000"
               />
             </div>
-            <div className="w-50">
+            <div className="col-6 ps-2">
               <label className="form-label">Max Price</label>
               <input
                 type="number"
@@ -152,28 +168,65 @@ function PropertyList() {
               />
             </div>
           </div>
-
-          {/* Sort Buttons */}
-          <div className="d-flex justify-content-center w-100">
-            <button
-              className="btn btn-outline-light me-2"
-              onClick={() => {
-                if (validateFilters()) {
-                  setSortByPrice(!sortByPrice);
-                }
-              }}
-            >
-              Sort by Price {sortByPrice ? "↓" : "↑"}
-            </button>
-            <button
-              className="btn btn-outline-light"
-              onClick={() => {
-                setSortByDateDesc(!sortByDateDesc);
-              }}
-            >
-              Sort by Date {sortByDateDesc ? "↓" : "↑"}
-            </button>
+          {/* Postcode Area Filter */}
+          <div className="col-12 col-md-3 mb-3">
+            <label className="form-label">Postcode Area</label>
+            <input
+              type="text"
+              className="form-control"
+              value={filters.postcode}
+              onChange={(e) =>
+                setFilters({ ...filters, postcode: e.target.value })
+              }
+              placeholder="Postcode(e.g., BR1)"
+            />
           </div>
+          {/* Date Added Filter */}
+          <div className="col-12 col-md-5 mb-3 ">
+            <label className="form-label">Date Added</label>
+            <div className="d-flex">
+              <input
+                type="date"
+                className="form-control"
+                value={filters.dateAddedFrom}
+                onChange={(e) =>
+                  setFilters({ ...filters, dateAddedFrom: e.target.value })
+                }
+                placeholder="From"
+              />
+              <input
+                type="date"
+                className="form-control ms-2"
+                value={filters.dateAddedTo}
+                onChange={(e) =>
+                  setFilters({ ...filters, dateAddedTo: e.target.value })
+                }
+                placeholder="To"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Sort Buttons */}
+        <div className="d-flex justify-content-center w-100 mb-4">
+          <button
+            className="btn btn-outline-light me-2"
+            onClick={() => {
+              if (validateFilters()) {
+                setSortByPrice(!sortByPrice);
+              }
+            }}
+          >
+            Sort by Price {sortByPrice ? "↓" : "↑"}
+          </button>
+          <button
+            className="btn btn-outline-light"
+            onClick={() => {
+              setSortByDateDesc(!sortByDateDesc);
+            }}
+          >
+            Sort by Date {sortByDateDesc ? "↓" : "↑"}
+          </button>
         </div>
       </div>
 
