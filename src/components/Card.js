@@ -61,9 +61,8 @@ function Card({ Property, isListView }) {
 
   return (
     <div className="card-body">
-      <h5 className="card-title text-center">{Property.type}</h5>
-
       <div className="card m-2" style={cardStyle}>
+        <h5 className="card-title text-center">{Property.type}</h5>
         {/* Main image display */}
         <img
           src={mainImage} // Use the current main image
