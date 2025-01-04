@@ -34,9 +34,21 @@ function Favourites() {
         <p>No favourites added yet!</p>
       ) : (
         <div className="d-flex flex-wrap justify-content-center">
-          {favourites.map((property) => (
-            <Card key={property.id} Property={property} isListView={false} />
-          ))}
+          {favourites.map((property) => {
+            // Ensure Property.picture is an array before passing to Card
+            const validProperty = {
+              ...property,
+              picture: Array.isArray(property.picture) ? property.picture : [],
+            };
+
+            return (
+              <Card
+                key={property.id}
+                Property={validProperty}
+                isListView={false}
+              />
+            );
+          })}
         </div>
       )}
     </div>
