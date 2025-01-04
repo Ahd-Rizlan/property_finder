@@ -12,6 +12,7 @@ function PropertyList() {
     maxPrice: "",
   });
   const [sortByPrice, setSortByPrice] = useState(false);
+  const [sortByDateDesc, setSortByDateDesc] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   // Validate the min/max values for bedrooms and price
@@ -51,6 +52,16 @@ function PropertyList() {
     .sort((a, b) => {
       if (sortByPrice) {
         return a.price - b.price;
+      }
+      if (sortByDateDesc) {
+        // Sort by date added in descending order
+        const dateA = new Date(
+          `${a.added.year}-${a.added.month}-${a.added.day}`
+        );
+        const dateB = new Date(
+          `${b.added.year}-${b.added.month}-${b.added.day}`
+        );
+        return dateB - dateA;
       }
       return 0;
     });
@@ -142,10 +153,10 @@ function PropertyList() {
             </div>
           </div>
 
-          {/* Sort Button */}
+          {/* Sort Buttons */}
           <div className="d-flex justify-content-center w-100">
             <button
-              className="btn btn-outline-light"
+              className="btn btn-outline-light me-2"
               onClick={() => {
                 if (validateFilters()) {
                   setSortByPrice(!sortByPrice);
@@ -153,6 +164,14 @@ function PropertyList() {
               }}
             >
               Sort by Price {sortByPrice ? "↓" : "↑"}
+            </button>
+            <button
+              className="btn btn-outline-light"
+              onClick={() => {
+                setSortByDateDesc(!sortByDateDesc);
+              }}
+            >
+              Sort by Date {sortByDateDesc ? "↓" : "↑"}
             </button>
           </div>
         </div>

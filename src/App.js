@@ -17,7 +17,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/Favourites" element={<Favourites />} />
           <Route path="/ContactUs" element={<ContactUs />} />
-          <Route path="/property-detail" element={<PropertyDetail />} />{" "}
+          <Route path="/property-detail" element={<PropertyDetail />} />
           {/* Add this route */}
         </Routes>
       </div>
