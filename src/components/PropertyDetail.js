@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Tabs, Tab } from "react-bootstrap";
 
 function PropertyDetail() {
   const navigate = useNavigate();
@@ -74,52 +75,64 @@ function PropertyDetail() {
         </div>
       </div>
       <div className="container mt-4">
-        <div className="row align-items-center border-top border-bottom border-secondary">
-          <div className="col-12 col-md-6 text-justify mb-3">
-            <p className="h5">
-              <i className="bi bi-cash-stack"></i> Price: ${property.price}
-            </p>
-            <p className="h5">
-              <i className="bi bi-geo-alt-fill"></i> Location:{" "}
-              {property.location}
-            </p>
-            <p className="h5">
-              <i className="bi bi-person-circle"></i> Tenure: {property.tenure}
-            </p>
-          </div>
-          <div className="col-12 col-md-6 text-justify mb-3">
-            <p className="h5">
-              <i className="bi bi-arrows-vertical"></i> Size: {property.size} sq
-              ft
-            </p>
-            <p className="h5">
-              <i className="bi bi-house-door-fill"></i> Year Built:{" "}
-              {property.yearBuilt}
-            </p>
-            <p className="h5">
-              <i className="bi bi-mailbox2-flag"></i> Postcode:{" "}
-              {property.postcode}
-            </p>
-          </div>
-        </div>
-        <p className="h4 text-center fw-bold lh-base mt-3">
-          {property.description}
-        </p>
-
-        {/* Floorplan Image with Hover Zoom */}
-        {floorplanImage && (
-          <div className="mt-4 text-center floorplan-container">
-            <h4 className="fw-bold mb-3">Floor Plan</h4>
-            <div className="floorplan-zoom">
-              <img
-                src={floorplanImage}
-                alt="Floorplan"
-                className="img-fluid"
-                style={imgStyle}
-              />
+        <Tabs
+          defaultActiveKey="description"
+          id="property-details-tabs"
+          className="mb-3"
+        >
+          {/* Description Tab */}
+          <Tab eventKey="description" title="Description">
+            <div className="row align-items-center border-top border-bottom border-secondary">
+              <div className="col-12 col-md-6 text-justify mb-3">
+                <p className="h5">
+                  <i className="bi bi-cash-stack"></i> Price: ${property.price}
+                </p>
+                <p className="h5">
+                  <i className="bi bi-geo-alt-fill"></i> Location:{" "}
+                  {property.location}
+                </p>
+                <p className="h5">
+                  <i className="bi bi-person-circle"></i> Tenure:{" "}
+                  {property.tenure}
+                </p>
+              </div>
+              <div className="col-12 col-md-6 text-justify mb-3">
+                <p className="h5">
+                  <i className="bi bi-arrows-vertical"></i> Size:{" "}
+                  {property.size} sq ft
+                </p>
+                <p className="h5">
+                  <i className="bi bi-house-door-fill"></i> Year Built:{" "}
+                  {property.yearBuilt}
+                </p>
+                <p className="h5">
+                  <i className="bi bi-mailbox2-flag"></i> Postcode:{" "}
+                  {property.postcode}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+            <p className="h4 text-center fw-bold lh-base mt-3">
+              {property.description}
+            </p>
+          </Tab>
+
+          {/* Floor Plan Tab */}
+          <Tab eventKey="floorplan" title="Floor Plan">
+            {floorplanImage && (
+              <div className="mt-4 text-center floorplan-container">
+                <h4 className="fw-bold mb-3">Floor Plan</h4>
+                <div className="floorplan-zoom">
+                  <img
+                    src={floorplanImage}
+                    alt="Floorplan"
+                    className="img-fluid"
+                    style={imgStyle}
+                  />
+                </div>
+              </div>
+            )}
+          </Tab>
+        </Tabs>
       </div>
       <div className="container d-flex justify-content-end">
         <button
