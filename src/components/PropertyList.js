@@ -105,6 +105,7 @@ function PropertyList() {
               <option value="">All Types</option>
               <option value="House">House</option>
               <option value="Apartment">Apartment</option>
+              <option value="Flat">Flat</option>
               <option value="Villa">Villa</option>
             </select>
           </div>

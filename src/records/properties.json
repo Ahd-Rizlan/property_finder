@@ -111,7 +111,7 @@
     },
     {
       "id": "prop5",
-      "type": "Flat",
+      "type": "Apartment",
       "bedrooms": 1,
       "size": 632.5,
       "price": 299500,
@@ -138,7 +138,7 @@
     },
     {
       "id": "prop6",
-      "type": "Flat",
+      "type": "Apartment",
       "bedrooms": 21,
       "size": 1672,
       "price": 2800000,
@@ -225,7 +225,7 @@
       "price": 30000,
       "tenure": "Leasehold",
       "description": " The apartment is situated on the fourth floor of Avon House, Welland Place in a central position with good access to the town centre and rail station. A state of the art facility with immaculate reception and communal areas, where you will find a housing manager on hand.A lift service provides access to the fourth floor where the apartment is accessed via its own secure front door. The entrance hall feels spacious and provides a handy storage cupboard as well as utility cupboard with plumbing and space for a washing machine.The open plan living, kitchen/diner is flooded with lots of natural light and commands views of the countryside beyond the town. The kitchen is well-equipped with a range of contemporary wall and base units providing plenty of storage. Integrated appliances include dishwasher, fridge/freezer, oven and electric hob.The master bedroom features fitted wardrobes and Juliet balcony. The ensuite bathroom feels fresh and contemporary with a suite comprising walk-in shower cubicle, wash hand basin and low-level WC. The second bedroom has a fitted wardrobe and could serve as study as well as a guest bedroom. The bathroom, accessed from the hall, features a suite comprising bath with shower over, WC and wash hand basin.",
-      "location": "Avon House, Welland Place, Market Harborough",
+      "location": "Avon House, Welland Place,  Harborough",
       "postcode": "LE16 7GD",
       "picture": [
         "images/Prop9.jpeg",
